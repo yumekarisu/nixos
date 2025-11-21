@@ -165,6 +165,7 @@
     sioyek
     libsForQt5.fcitx5-qt
     libappindicator
+    jre_minimal
     libreoffice-qt6-fresh
     zotero
     hunspell
