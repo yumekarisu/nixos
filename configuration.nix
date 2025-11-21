@@ -31,6 +31,9 @@
   networking.networkmanager.enable = true;
 
   hardware.bluetooth.enable = true;
+  hardware.graphics = {
+    enable32Bit = true; # enable 32-bit GPU driver
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
@@ -125,6 +128,13 @@
     #media-session.enable = true;
   };
 
+  # Gaming
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
+
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
 
@@ -180,6 +190,8 @@
     discord
     spotify
     easyeffects
+    protonplus
+    protontricks
     qbittorrent
     zed-editor
   ];
