@@ -8,7 +8,7 @@
   imports =
     [
       ./hardware-configuration.nix # Include the results of the hardware scan.
-      ./kde.nix # enable KDE Plasma
+      ./niri.nix
       ./locale-ime.nix # enable fcitx5 and set locale
       ./fonts.nix # fonts
       ./sound.nix # sound
@@ -22,7 +22,7 @@
     loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
-        "psmouse.elan_smbus=0"
+        "psmouse.elantech_smbus=0"
     ];
   };
 
