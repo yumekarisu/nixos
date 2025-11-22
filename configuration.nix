@@ -9,6 +9,7 @@
     [
       ./hardware-configuration.nix # Include the results of the hardware scan.
       ./niri.nix
+      ./qt.nix
       ./locale-ime.nix # enable fcitx5 and set locale
       ./fonts.nix # fonts
       ./sound.nix # sound
