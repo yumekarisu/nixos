@@ -12,6 +12,7 @@
       ./locale-ime.nix # enable fcitx5 and set locale
       ./fonts.nix # fonts
       ./sound.nix # sound
+      ./networkmanager.nix # networkmanager
       ./gaming.nix # steam and gaming
     ];
 
@@ -36,7 +37,6 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
 
   hardware.bluetooth.enable = true;
   hardware.graphics = {
@@ -134,6 +134,7 @@
       protontricks
       qbittorrent
       zed-editor
+      nixd
     ];
   };
 
