@@ -90,6 +90,17 @@
     liberation_ttf
   ];
 
+  # Keyd
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = [ "*" ];
+        settings.main.capslock = "overload(control, muhenkan)";
+      };
+    };
+  };
+
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
@@ -165,39 +176,42 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-    curl
-    wget
-    rclone
-    rsync
-    stow
-    tailscale
-    calibre
-    sioyek
-    libsForQt5.fcitx5-qt
-    libappindicator
-    jre_minimal
-    libreoffice-qt6-fresh
-    zotero
-    hunspell
-    hunspellDicts.en_US
-    hunspellDicts.id_ID
-    obsidian
-    bitwarden-desktop
-    ente-auth
-    anki-bin
-    mpv
-    krita
-    discord
-    spotify
-    easyeffects
-    protonplus
-    protontricks
-    qbittorrent
-    zed-editor
-  ];
+  environment = {
+    sessionVariables = {};
+    systemPackages = with pkgs; [
+      vim
+      git
+      curl
+      wget
+      rclone
+      rsync
+      stow
+      tailscale
+      calibre
+      sioyek
+      libsForQt5.fcitx5-qt
+      libappindicator
+      jre_minimal
+      libreoffice-qt6-fresh
+      zotero
+      hunspell
+      hunspellDicts.en_US
+      hunspellDicts.id_ID
+      obsidian
+      bitwarden-desktop
+      ente-auth
+      anki-bin
+      mpv
+      krita
+      discord
+      spotify
+      easyeffects
+      protonplus
+      protontricks
+      qbittorrent
+      zed-editor
+    ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
