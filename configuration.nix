@@ -6,8 +6,13 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+    [
+      ./hardware-configuration.nix # Include the results of the hardware scan.
+      ./kde.nix # enable KDE Plasma
+      ./locale-ime.nix # enable fcitx5 and set locale
+      ./fonts.nix # fonts
+      ./sound.nix # sound
+      ./gaming.nix # steam and gaming
     ];
 
   # Bootloader.
@@ -41,55 +46,6 @@
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
 
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    extraLocales = ["ja_JP.UTF-8/UTF-8"];
-    extraLocaleSettings = {
-      LC_ADDRESS = "id_ID.UTF-8";
-      LC_IDENTIFICATION = "id_ID.UTF-8";
-      LC_MEASUREMENT = "id_ID.UTF-8";
-      LC_MONETARY = "id_ID.UTF-8";
-      LC_NAME = "id_ID.UTF-8";
-      LC_NUMERIC = "id_ID.UTF-8";
-      LC_PAPER = "id_ID.UTF-8";
-      LC_TELEPHONE = "id_ID.UTF-8";
-      LC_TIME = "id_ID.UTF-8";
-    };
-    inputMethod = {
-      type = "fcitx5";
-      enable = true;
-      fcitx5 = {
-        ignoreUserConfig = true;
-        waylandFrontend = true;
-        addons = with pkgs; [
-          fcitx5-gtk
-          fcitx5-mozc-ut
-          fcitx5-nord
-        ];
-        settings = {
-          inputMethod = {
-            "Groups/0" = {
-              Name = "Default";
-              "Default Layout" = "us";
-              DefaultIM = "keyboard-us";
-            };
-            "Groups/0/Items/0".Name = "keyboard-us";
-            "Groups/0/Items/1".Name = "mozc";
-          };
-        };
-      };
-    };
-  };
-
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    noto-fonts-color-emoji
-    liberation_ttf
-  ];
-
   # Keyd
   services.keyd = {
     enable = true;
@@ -105,15 +61,6 @@
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  environment.plasma6.excludePackages = with pkgs; [
-    kdePackages.elisa
-    kdePackages.okular
-    kdePackages.kate
-  ];
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -125,29 +72,6 @@
 
   # Enable opentabletdriver
   hardware.opentabletdriver.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-  # Gaming
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
 
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
